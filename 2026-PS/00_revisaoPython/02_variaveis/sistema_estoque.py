@@ -32,6 +32,11 @@ estoque = [ #Armazena os três produtos em uma lista
 
 print("\n=== RELATÓRIO DE ESTOQUE ===\n")
 
+# Contadores para o resumo geral
+contador_critico = 0
+contador_adequado = 0
+contador_excesso = 0
+
 for produto in estoque:
 # Traz o relatório do estoque baseado nos critérios
     nome = produto["nome"]
@@ -39,16 +44,64 @@ for produto in estoque:
 
     if quantidade < 5:
         situacao = "Crítico"
+        contador_critico += 1
     elif 5 <= quantidade <= 20:
         situacao = "Adequado"
+        contador_adequado += 1
     else:
         situacao = "Excesso"
+        contador_excesso += 1
 
 # Mostra nome, quantidade e situação
     print(f"Produto : {nome}")
     print(f"Quantidade: {quantidade}")
     print(f"Situação : {situacao}")
     print("-" * 35)
+
+
+#================================================
+# ==== RESUMO GERAL DO ESTOQUE ====
+#================================================
+
+print("\n=== RESUMO GERAL ===")
+print(f"Crítico  : {contador_critico}")
+print(f"Adequado : {contador_adequado}")
+print(f"Excesso  : {contador_excesso}")
+
+
+#================================================
+# ==== CONSULTAR PRODUTO ESPECÍFICO ====
+#================================================
+
+while True:
+    print("\nDeseja consultar um produto pelo nome? (s/n)")
+    consulta = input().lower()
+
+    if consulta == "n":
+        break
+
+    nome_busca = input("Digite o nome do produto: ").lower()
+    encontrado = False
+
+    for produto in estoque:
+        if produto["nome"].lower() == nome_busca:
+            quantidade = produto["quantidade"]
+
+            if quantidade < 5:
+                situacao = "Crítico"
+            elif quantidade <= 20:
+                situacao = "Adequado"
+            else:
+                situacao = "Excesso"
+
+            print(f"\nProduto : {produto['nome']}")
+            print(f"Quantidade: {quantidade}")
+            print(f"Situação : {situacao}")
+            encontrado = True
+            break
+
+    if not encontrado:
+        print("Produto não encontrado no estoque.")
 
 
 #================================================
