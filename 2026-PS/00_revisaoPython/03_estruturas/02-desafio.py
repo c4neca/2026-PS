@@ -1,12 +1,12 @@
 # ================================================
 # SISTEMA DE BIBLIOTECA
-# ================================================
+#=================================================
 # Disciplina : Programação de Sistemas (PS)
 # Aula       : 05 - Revisão: Estruturas de Dados
 # Autor      : Ana Vitória Schactae Brandão
 # Data       : 26/02/2026
 # Repositório: https://github.com/c4neca/2026-PS.git
-# ================================================
+#=================================================
 
 
 # ================================================
@@ -39,7 +39,6 @@ print("Após append:", titulos)
 
 # Verificando se um título existe na lista
 busca = "Código Limpo"
-
 if busca in titulos:
     print(f'"{busca}" está no catálogo.')
 else:
@@ -97,8 +96,7 @@ print("Editora:", editora)
 # CATÁLOGO: LISTA DE DICIONÁRIOS
 # ================================================
 
-# Criando um catálogo com vários livros
-# cada livro é representado por um dicionário
+# Cria um catálogo com vários livros
 catalogo = [
     {"titulo": "O Programador Pragmático", "autor": "Andrew Hunt", "ano": 1999, "disponivel": True},
     {"titulo": "Código Limpo", "autor": "Robert C. Martin", "ano": 2008, "disponivel": True},
@@ -108,7 +106,7 @@ catalogo = [
 print("\n=== Catálogo da Biblioteca ===")
 print()
 
-# Percorrendo todos os livros do catálogo
+# Percorre todos os livros do catálogo
 for livro in catalogo:
     status = "Disponível" if livro["disponivel"] else "Emprestado"
     print(f'     {livro["titulo"]} ({livro["ano"]})')
@@ -215,15 +213,15 @@ if not encontrado:
 
 print("\n=== Registro de empréstimo / devolução ===")
 
-# Usuário informa o título do livro
+# Entrada para determinar o título do livro
 titulo_busca = input("Digite o título do livro: ").lower()
 encontrado = False
 
-# Procura o livro e altera o status de disponibilidade
+# Procura o livro e altera o status se disponível ou não 
 for livro in catalogo:
     if titulo_busca in livro["titulo"].lower():
 
-        # alterna o valor True/False
+        # alterna o valor de True e False
         livro["disponivel"] = not livro["disponivel"]
 
         status = "Disponível" if livro["disponivel"] else "Emprestado"
@@ -241,12 +239,12 @@ if not encontrado:
 
 print("\n=== Relatório final ===")
 
-# Calculando totais
+# Calcula totais
 total = len(catalogo)
 disponiveis = 0
 emprestados = 0
 
-# Contagem de livros disponíveis e emprestados
+# Conta os livros disponíveis e emprestados
 for livro in catalogo:
     if livro["disponivel"]:
         disponiveis += 1
@@ -259,7 +257,7 @@ print("Emprestados     :", emprestados)
 
 print("\nLivros emprestados:")
 
-# Listando os livros que estão emprestados
+# Lista os livros que estão emprestados
 for livro in catalogo:
     if not livro["disponivel"]:
         print(" -", livro["titulo"])
