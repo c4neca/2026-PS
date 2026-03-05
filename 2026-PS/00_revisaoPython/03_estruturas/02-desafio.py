@@ -143,12 +143,12 @@ if not encontrado:
 
 
 # ================================================
-# ATRIBUTOS DO PRIMEIRO LIVRO
+# CARACTERÍSTICAS DO PRIMEIRO LIVRO
 # ================================================
 
 print("\n=== Atributos do primeiro livro ===")
 
-# .items() retorna chave e valor do dicionário
+# retorna chave e valor do dicionário
 for chave, valor in catalogo[0].items():
     print(f"   {chave}: {valor}")
 
@@ -164,7 +164,7 @@ titulo = input("Título do livro: ")
 autor = input("Autor do livro: ")
 ano = int(input("Ano de publicação: "))
 
-# Criando um novo dicionário com os dados informados
+# Cria um novo dicionário com os dados informados
 novo_livro = {
     "titulo": titulo,
     "autor": autor,
@@ -172,7 +172,7 @@ novo_livro = {
     "disponivel": True
 }
 
-# Adicionando o novo livro ao catálogo
+# Adiciona o novo livro ao catálogo
 catalogo.append(novo_livro)
 
 print("\n=== Catálogo atualizado ===")
