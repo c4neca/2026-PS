@@ -9,7 +9,7 @@
 ================================================================
 '''
 from time import sleep 
-class Droid: # Agrupa os dados de um pet do sistema de hotel nessa classe
+class Droid: # Agrupa os dados de um droid do sistema de hotel nessa classe
     def __init__(self, nome, tipo, serie, idade, peso, nome_do_dono, telefone, manutencao,  diaria):
         self.nome = nome
         self.tipo = tipo

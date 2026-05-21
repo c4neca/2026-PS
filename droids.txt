@@ -1,0 +1,2 @@
+R2-D2;Astromecânico;D2;49;20.0;Padmé;9999999999;True;False
+R2-D2;Astromecanico;D2;29;40.0;Padmé;99999999999999;True;False
