@@ -4,25 +4,40 @@ Sistema de Hotel para Droids.
 """
 
 import pickle
+import json
 
 
 class Droid:
-    def __init__(self, nome, tipo, serie, idade, peso, nome_do_dono, telefone, manutencao):
+    def __init__(self, nome, tipo, serie, idade, altura, peso, nome_do_dono, telefone, manutencao):
         self.nome = nome
         self.tipo = tipo
         self.serie = serie
         self.idade = idade
+        self.altura = altura
         self.peso = peso
         self.nome_do_dono = nome_do_dono
         self.telefone = telefone
         self.manutencao = manutencao
         self.hospedado = False
 
+    def para_dicionario(self):
+        return {
+            "nome": self.nome,
+            "tipo": self.tipo,
+            "serie": self.serie,
+            "idade": self.idade,
+            "altura":self.altura,
+            "peso": self.peso,
+            "nome_do_dono": self.nome_do_dono,
+            "manutencao": self.manutencao,
+            "hospedado": self.hospedado,
+        }
     def exibir(self):
         print(f"Nome           : {self.nome}")
         print(f"Tipo           : {self.tipo}")
         print(f"Série          : {self.serie}")
         print(f"Idade          : {self.idade}")
+        print(f"Altura         : {self.altura}")
         print(f"Peso           : {self.peso} kg")
         print(f"Dono           : {self.nome_do_dono}")
         print(f"Telefone       : {self.telefone}")
@@ -43,6 +58,7 @@ class Droid:
             f"{self.tipo};"
             f"{self.serie};"
             f"{self.idade};"
+            f"{self.altura};"
             f"{self.peso};"
             f"{self.nome_do_dono};"
             f"{self.telefone};"
@@ -82,48 +98,21 @@ class Droid:
             f"para {self.peso} kg."
         )
 # --------------------------------------------------
-# SALVAR TXT
+# SALVAR JSON
 # --------------------------------------------------
-def salvar_em_txt(droids, caminho):
-
+def salvar_em_json(droids, caminho):
     with open(caminho, "w", encoding="utf-8") as arquivo:
-
-        for d in droids:
-            arquivo.write(d.para_linha_txt() + "\n")
+        lista_dicionarios = [d.para_dicionario() for d in droids]
+        json.dump(lista_dicionarios, arquivo, ensure_ascii=False, indent=4)
 
     print(f"{len(droids)} droid(s) salvo(s) em {caminho}")
 # --------------------------------------------------
-# CARREGAR TXT
+# CARREGAR JSON
 # --------------------------------------------------
-def carregar_de_txt(caminho):
-    droids = []
-    try:
-        with open(caminho, "r", encoding="utf-8") as arquivo:
-            for linha in arquivo:
-                linha = linha.strip()
-                if not linha:
-                    continue
-                partes = linha.split(";")
-                if len(partes) >= 9:
-                    droid = Droid(
-                        partes[0],
-                        partes[1],
-                        partes[2],
-                        int(partes[3]),
-                        float(partes[4]),
-                        partes[5],
-                        partes[6],
-                        partes[7] == "True"
-                    )
-                    droid.hospedado = (
-                        partes[8] == "True"
-                    )
-                    droids.append(droid)
-    except FileNotFoundError:
-        print(
-            f"Arquivo {caminho} ainda não existe."
-        )
-    return droids
+def carregar_em_json(pets):    
+    with open("droids.json", "r", encoding="utf-8") as arquivo:
+        pets = json.load(arquivo)
+    print(pets)
 # --------------------------------------------------
 # SALVAR BINÁRIO
 # --------------------------------------------------
@@ -152,6 +141,7 @@ def cadastrar(droids):
     tipo = input("Tipo           : ")
     serie = input("Série          : ")
     idade = int(input("Idade          : "))
+    altura = float(input("Altura (m)    :"))
     peso = float(input("Peso (kg)      : "))
     nome_do_dono = input("Nome do dono   : ")
     telefone = input("Telefone       : ")
@@ -159,7 +149,7 @@ def cadastrar(droids):
         input("Manutenção OK? (S/N): ").upper() == "S"
     )
     droids.append(
-        Droid(nome, tipo, serie, idade, peso, nome_do_dono, telefone, manutencao)
+        Droid(nome, tipo, serie, idade, altura, peso, nome_do_dono, telefone, manutencao)
     )
 
     print("Droid cadastrado.")
@@ -263,7 +253,7 @@ def menu():
         print("4 - Check-in")
         print("5 - Check-out")
         print("6 - Atualizar peso")
-        print("7 - Salvar em .txt")
+        print("7 - Salvar em .json")
         print("8 - Salvar em binário")
         print("0 - Sair")
         opcao = input("Opção: ")
@@ -280,15 +270,11 @@ def menu():
         elif opcao == "6":
             atualizar_peso(droids)
         elif opcao == "7":
-            salvar_em_txt(
-                droids,
-                "droids.txt"
-            )
+            caminho_json = "2026-PS/02_poo/hotel_pets_v2/droids.json"
+            salvar_em_json(droids, caminho_json)
         elif opcao == "8":
-            salvar_em_binario(
-                droids,
-                "droids.bin"
-            )
+            caminho_binario = "2026-PS/02_poo/hotel_pets_v2/droids.bin"
+            salvar_em_binario(droids, caminho_binario)
         elif opcao == "0":
             salvar_em_binario(
                 droids,

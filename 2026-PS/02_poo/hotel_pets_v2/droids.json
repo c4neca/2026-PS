@@ -1,0 +1,13 @@
+[
+    {
+        "nome": "rs",
+        "tipo": "rsss",
+        "serie": "rrrr",
+        "idade": 12,
+        "altura": 1.29,
+        "peso": 20.0,
+        "nome_do_dono": "sim",
+        "manutencao": true,
+        "hospedado": false
+    }
+]
