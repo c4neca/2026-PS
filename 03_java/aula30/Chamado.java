@@ -43,4 +43,35 @@ public class Chamado {
         }
         return false; 
     }
+
+    public boolean alterarPrioridade(int novaPrioridade) {
+        if (this.status.equals("FECHADO")) {
+            return false;
+        }
+
+        if (novaPrioridade >= 1 && novaPrioridade <= 5) {
+            this.prioridade = novaPrioridade;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean avancarStatus() {
+        if (this.status.equals("ABERTO")) {
+            this.status = "EM_ANDAMENTO";
+            return true;
+        } else if (this.status.equals("EM_ANDAMENTO")) {
+            this.status = "FECHADO";
+            return true;
+        }
+        return false; 
+    }
+
+    public boolean incrementarDias(int dias) {
+        if (this.status.equals("FECHADO") || dias <= 0) {
+            return false;
+        }
+        this.diasAberto = this.diasAberto + dias;
+        return true;
+    }
 }
