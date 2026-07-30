@@ -50,7 +50,6 @@ public class Main {
             System.out.println("Operacao nao permitida (chamado ja esta fechado).");
         }
         System.out.println();
-
         System.out.println("----------------------------------------");
         System.out.println("ESTADO FINAL DOS CHAMADOS:");
         System.out.println(c1.getResumo());
