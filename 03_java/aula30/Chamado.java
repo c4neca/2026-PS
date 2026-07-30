@@ -74,4 +74,8 @@ public class Chamado {
         this.diasAberto = this.diasAberto + dias;
         return true;
     }
+    public String getResumo() {
+        return "ID: " + idChamado + " | Titulo: " + titulo + " | Status: " + status + 
+               " | Prioridade: " + prioridade + " | Dias aberto: " + diasAberto;
+    }
 }
