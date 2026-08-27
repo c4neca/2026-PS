@@ -10,12 +10,14 @@ public class Aluno {
     private String nome;
     private String matricula;
     private String curso;
+    private String musicaFav;
 
-    public Aluno(String nome, String matricula, String curso) {
+    public Aluno(String nome, String matricula, String curso, String musicaFav) {
         // "this" diferencia variáveis locais de atributos com o mesmo nome
         this.nome = nome;
         this.matricula = matricula;
         this.curso = curso;
+        this.musicaFav = musicaFav;
     }
     // getters: obtém o valor de um atributo privado;  
     public String getNome() {
@@ -28,6 +30,10 @@ public class Aluno {
 
     public String getCurso(){
         return curso;
+    }
+
+    public String getMusicaFav(){
+        return musicaFav;
     }
 
     public void setNome(String nome) {
