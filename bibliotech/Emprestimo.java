@@ -5,6 +5,7 @@ public class Emprestimo {
     private Leitor leitor;
     private LocalDate dataRetirada;
     private LocalDate dataDevolucao;
+    private LocalDate dataPrevista;
     private boolean ativo;
 
     public Emprestimo(Livro livro, Leitor leitor) {
@@ -29,6 +30,7 @@ public class Emprestimo {
         leitor.pegouLivro();
         dataRetirada = LocalDate.now();
         dataDevolucao = null;
+        dataPrevista = dataRetirada.plusDays(7);
         ativo = true;
         return true;
     }
@@ -44,7 +46,7 @@ public class Emprestimo {
         ativo = false;
         return true;
     }
-
+    
     public Livro getLivro() {
         return livro;
     }
@@ -61,6 +63,10 @@ public class Emprestimo {
         return dataDevolucao;
     }
 
+    public LocalDate getDataPrevista() {
+        return dataPrevista;
+    }
+
     public boolean estaAtivo() {
         return ativo;
     }
@@ -73,7 +79,7 @@ public class Emprestimo {
         }
 
         String situacao = ativo
-            ? "ativo"
+            ? "ativo (devolução prevista para: " + dataPrevista + ")"
             : "devolvido em " + dataDevolucao;
 
         return livro.getTitulo() + " para "

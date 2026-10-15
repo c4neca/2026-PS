@@ -29,17 +29,28 @@ public class TesteRequisitos {
         verificar("RF03 titulo fora do acervo nao e encontrado", biblioteca.buscarLivro("O Cortico") == null);
 
         System.out.println();
-        System.out.println(passaram + " passaram, " + falharam + " falharam.");
 
         verificar("RF05 emprestimo de livro disponivel e aceito", biblioteca.emprestar("Dom Casmurro", "2026010"));
         verificar("RF05 livro emprestado fica indisponivel", !dom.estaDisponivel());
-        verificar("RF05 leitor passa a ter 1 livro em maos", pedro.getLivrosEmMaos() == 1);
-        verificar("RF05 livro emprestado e recusado para outro leitor", !biblioteca.emprestar("Dom Casmurro", "2026011"));
-        verificar("RF05 leitor no limite e recusado", !biblioteca.emprestar("Capitaes da Areia", "2026010"));
+        verificar("RF05 leitor passa a ter 1 livro", pedro.getLivrosEmMaos() == 1);
+
+        System.out.println();
+        System.out.println("--- Teste das 5 Recusas do Arco");
+
+        verificar("Recusa 1: Livro que não existe", !biblioteca.emprestar("O Cortico", "2026011" ));
+        
+        verificar("Recusa 2: Leitor inexistente", !biblioteca.emprestar("Capitaes da Areia", "999999"));
+        
+        verificar("Recusa 3: Livro já emprestado para outro", !biblioteca.emprestar("Dom Casmurro", "2026011"));
+        
+        verificar("Recusa 4: Leitor acima do limite", !biblioteca.emprestar("Capitaes da Areia", "2026010"));
         
         verificar("RF04 devolucao de emprestimo aceita", biblioteca.devolver("Dom Casmurro"));
         verificar("RF04 livro devolvido volta a ficar disponivel", dom.estaDisponivel());
-        verificar("RF04 livro devolvido recusado na segunda devolução", !biblioteca.devolver("Dom Casmurro"));
+        
+        verificar("Recusa 5: livro devolvido recusado na segunda devolução", !biblioteca.devolver("Dom Casmurro"));
+
+        System.out.println();
         System.out.println(passaram + " passaram, " + falharam + " falharam.");
 
     }

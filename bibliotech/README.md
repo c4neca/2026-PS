@@ -71,11 +71,12 @@ java TelaBiblioteca
 | RF03 | `Biblioteca.buscarLivro()`e `Livro.estaDisponivel()`; area do acervo na janela | TesteRequisitos: 3 verificacoes RF04 |
 | RF04 | `Biblioteca.devolver()`, que chama `Emprestimo;registrarDevolucao()`; bota Devolver | TesteRequisitos: 3 verificacoes RF04 |
 | RF05 | `Biblioteca.emprestar()`, que chama Èmprestimo.registrarEmprestimo()`; botao Emprestar | TesteRequisitos: 5 verificacoes RF05 |
-| RF06 | (o seu RF: onde esta, ou "ainda nao implementado") | (a verificacao, ou "sem verificacao") |
+| RF06 | 'Emprestimo.getDataPrevista()' | (calculo de prazo aplicado, mas sem multas) | Sem verificação de multas
 
 ## 8. O que o Bibliotech ainda nao faz
 
-- HU05: ver os emprestimos atrasados. O emprestimo ainda nao tem prazo.
+- HU05: ver os emprestimos atrasados. ~~O emprestimo ainda nao tem prazo.~~
+(a base ase do prazo foi implementada em 'dataPrevista' na classe 'Emprestimo', mas a lista de atrasos e multas ainda não funciona)
 - RNF02: qualquer pessoa que abre a janela pode emprestar e devolver; nao ha login de bibliotecario.
 - Cadastrar livro e leitor pela janela: hoje o cadastro esta no `main`de `TelaBiblioteca`.
 - Guardar os dados: ao fechar o programa, os emprestimos se perdem.
