@@ -2,36 +2,24 @@ public class TesteLivroDAO {
 
     public static void main(String[] args) {
 
-        LivroDAO dao = new LivroDAO();
+    LivroDAO dao = new LivroDAO();
 
-        boolean livro1 = dao.adicionarLivro(
-            "Dom Casmurro",
-            "Machado de Assis",
-            1899
-        );
+boolean atualizou = dao.atualizarLivro(
+    999999,
+    "Livro Inexistente",
+    "Autor Desconhecido",
+    2026
+);
 
-        boolean livro2 = dao.adicionarLivro(
-            "A Hora da Estrela", 
-            "Clarice Lispector", 
-            1977
-            );
+boolean excluiu = dao.excluirLivro(999999);
 
-        boolean livro3 = dao.adicionarLivro(
-            "A Guerra da Papoula", 
-            "R. F. Kuang", 
-            2018);
+System.out.println(
+    "Atualização: " + atualizou
+);
 
-        System.out.println(
-            "Livro 1 adicionado: " + livro1
-        );
+System.out.println(
+    "Exclusão: " + excluiu
+);
 
-        System.out.println(
-            "Livro 2 adicionado: " + livro2
-        );
-
-        System.out.println(
-            "Livro 3 adicionado: " + livro3
-        );
-
-    }
+}
 }

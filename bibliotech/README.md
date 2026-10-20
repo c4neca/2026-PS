@@ -80,3 +80,22 @@ java TelaBiblioteca
 - RNF02: qualquer pessoa que abre a janela pode emprestar e devolver; nao ha login de bibliotecario.
 - Cadastrar livro e leitor pela janela: hoje o cadastro esta no `main`de `TelaBiblioteca`.
 - Guardar os dados: ao fechar o programa, os emprestimos se perdem.
+
+## 9. Persistência de Dados
+- Banco de dados utilizado: MariaDB.
+- Finalidade da classe Conexão: A classe "Conexão" é conectar e comunicar o Java ao banco de dados.
+- Responsabilidade da classe LivroDAO: A classe DAO implementa os métodos para cadastrar, atualizar e excluir objetos (nesse caso, livros).
+- Métodos implementados e funcionalidades: 
+1. `LivroDAO.adicionarlivro()` - Permite adicionar livros ao banco por meio de nome, autor e data de lançamento;
+2. `LivroDAO.atualizarlivro()` - Permite modificar as informações presentes nas obras (nome, autor e ano) por meio do identificador;
+3. `Biblioteca.excluirlivro()` - Permite excluir uma obra por meio do id;
+
+   ## 9.1 Como executar:
+   No Codespace, dentro da pasta bibliotech:
+
+   ´´´
+   javac -cp ".:lib/*" Conexao.java LivroDAO.java TesteLivroDAO.java
+   java -cp ".:lib/*" TesteLivroDAO
+
+   `TesteLivroDAO` confere a implementação de Livro.class;
+
