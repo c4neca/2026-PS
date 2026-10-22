@@ -92,10 +92,98 @@ java TelaBiblioteca
 
    ## 9.1 Como executar:
    No Codespace, dentro da pasta bibliotech:
+   
 
-   ´´´
+   Inicie o MariaDB:
+   sudo service mariadb start
+
+   1. Preparação/Variáveis de Conexão
+   Configure as variáveis com o usuário e a senha do banco de dados:
+   export DB_USER=bibliotech
+   read -rs -p "Senha do banco: " DB_PASSWORD
+   echo
+   export DB_PASSWORD
+
+   2. Teste de Conexão com o Banco de Dados
+   Compile a classe de conexão (utilize o mesmo terminal que as variáveis foram configuradas):
+   javac -cp ".:lib/*" Conexao.java
+
+   Execute o teste de conexão:
+   java -cp ".:lib/*" Conexao
+
+   3. Teste de Persistência:
+   A. Inserção
+   Edite o arquivo TesteLivroDAO com esse código:
+   public class TesteLivroDAO {
+    public static void main(String[] args) {
+        LivroDAO dao = new LivroDAO();
+
+        boolean resultado = dao.adicionarLivro(
+            "Nome",
+            "Autor",
+            Ano
+        );
+
+        System.out.println("Livro adicionado: " + resultado);
+    }
+}
+   
+   Compile as classes:
+   javac -cp ".:lib/*" Conexao.java LivroDAO.java TesteLivroDAO.java
+
+   Execute:
+   java -cp ".:lib/*" TesteLivroDAO
+
+   Confira no MariaDB (descubra o id do objeto adicionado):
+   mariadb -u bibliotech -p -h localhost bibliotech
+
+   Execute no prompt do MariaDB:
+   SELECT * FROM livros;
+   EXIT;
+
+   B. Atualização:
+   Edite o main de TesteLivroDAO.java, colocando o id do objeto anterior:
+   public class TesteLivroDAO {
+    public static void main(String[] args) {
+        LivroDAO dao = new LivroDAO();
+
+        // Substitua o '1' pelo ID do livro cadastrado em seu banco
+        boolean resultado = dao.atualizarLivro(
+            1,
+            "Dom Casmurro - Edição Especial",
+            "Machado de Assis",
+            1899
+        );
+
+        System.out.println("Livro atualizado: " + resultado);
+    }
+}
+
+   Compile e execute:
    javac -cp ".:lib/*" Conexao.java LivroDAO.java TesteLivroDAO.java
    java -cp ".:lib/*" TesteLivroDAO
 
-   `TesteLivroDAO` confere a implementação de Livro.class;
+   Confira no MariaDB:
+   mariadb -u bibliotech -p -h localhost bibliotech -e "USE bibliotech; SELECT * FROM livros;"
+
+   C. TESTE DE EXCLUSÃO
+   Edite o método main de TesteLivroDAO.java para excluir o registro:
+   public class TesteLivroDAO {
+    public static void main(String[] args) {
+        LivroDAO dao = new LivroDAO();
+
+        // Substitua o '1' pelo ID do livro a ser excluído
+        boolean resultado = dao.excluirLivro(1);
+
+        System.out.println("Livro excluído: " + resultado);
+    }
+}
+
+   Compile e Execute:
+   javac -cp ".:lib/*" Conexao.java LivroDAO.java TesteLivroDAO.java
+   java -cp ".:lib/*" TesteLivroDAO
+
+   Confira no MariDB se a tabela está sem o registro:
+   mariadb -u bibliotech -p -h localhost bibliotech -e "USE bibliotech; SELECT * FROM livros;"
+
 
